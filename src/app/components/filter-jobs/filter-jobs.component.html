@@ -1,0 +1,122 @@
+<div class="flex flex-col items-center mt-10 mb-8 px-4">
+    <h1 class="text-4xl md:text-5xl font-bold text-center mb-8 text-gray-900 dark:text-white animate-fade-in">
+      Encuentra tu próximo proyecto en <span class="text-blue-600 dark:text-blue-400">arquitectura y construcción</span>
+    </h1>
+  
+    <div class="w-full max-w-5xl bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-xl dark:shadow-black/30 animate-slide-in ring-1 ring-gray-200 dark:ring-gray-700">
+      <form [formGroup]="searchForm" (ngSubmit)="searchJobs()">
+        <div class="flex flex-col md:flex-row gap-3">
+          <div class="flex-grow relative">
+            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+              <svg class="h-5 w-5 text-gray-400 dark:text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+              </svg>
+            </div>
+            <input
+              formControlName="query"
+              type="text"
+              class="w-full pl-10 pr-4 py-3 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white rounded-xl focus:ring-2 focus:ring-blue-500 focus:bg-white dark:focus:bg-gray-600 transition-all duration-200 placeholder-gray-500 dark:placeholder-gray-400 relative z-10"
+              placeholder="Buscar trabajos, empresas, ubicaciones..."
+            />
+          </div>
+          <button
+            type="submit"
+            class="px-8 py-3 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 dark:from-blue-500 dark:to-blue-600 dark:hover:from-blue-600 dark:hover:to-blue-700 text-white rounded-xl transition-all duration-200 font-semibold shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
+          >
+            <span class="flex items-center gap-2">
+              <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+              </svg>
+              Buscar
+            </span>
+          </button>
+        </div>
+  
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
+          <div class="space-y-2">
+            <label for="area-select" class="block text-sm font-semibold text-gray-700 dark:text-gray-300">Área de especialización</label>
+            <div class="relative">
+              <select id="area-select" formControlName="area" class="w-full p-3 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white rounded-xl focus:ring-2 focus:ring-blue-500 focus:bg-white dark:focus:bg-gray-600 transition-all duration-200 appearance-none cursor-pointer relative z-10">
+                <option value="">Todas las áreas</option>
+                <option *ngFor="let area of categories" [value]="area.id">{{ area.nombre }}</option>
+              </select>
+              <div class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
+                <svg class="h-5 w-5 text-gray-400 dark:text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+              </div>
+            </div>
+          </div>
+  
+          <div class="space-y-2">
+            <label for="region-select" class="block text-sm font-semibold text-gray-700 dark:text-gray-300">Región</label>
+            <div class="relative">
+              <select id="region-select" formControlName="region" class="w-full p-3 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white rounded-xl focus:ring-2 focus:ring-blue-500 focus:bg-white dark:focus:bg-gray-600 transition-all duration-200 appearance-none cursor-pointer relative z-10">
+                <option value="">Todas las regiones</option>
+                <option *ngFor="let region of locations" [value]="region.id">{{ region.region }}</option>
+              </select>
+              <div class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
+                <svg class="h-5 w-5 text-gray-400 dark:text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+              </div>
+            </div>
+          </div>
+  
+          <div class="space-y-2">
+            <label for="experience-select" class="block text-sm font-semibold text-gray-700 dark:text-gray-300">Nivel de experiencia</label>
+            <div class="relative">
+              <select id="experience-select" formControlName="experience" class="w-full p-3 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white rounded-xl focus:ring-2 focus:ring-blue-500 focus:bg-white dark:focus:bg-gray-600 transition-all duration-200 appearance-none cursor-pointer relative z-10">
+                <option value="">Cualquier nivel</option>
+                <option *ngFor="let exp of experiencias" [value]="exp">{{ exp }}</option>
+              </select>
+              <div class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
+                <svg class="h-5 w-5 text-gray-400 dark:text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Filtros adicionales -->
+        <div class="mt-6 pt-6">
+          <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">Filtros avanzados</h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div class="flex items-center">
+              <input
+                id="remote"
+                type="checkbox"
+                class="h-4 w-4 text-blue-600 focus:ring-blue-500 rounded"
+              />
+              <label for="remote" class="ml-2 text-sm text-gray-700 dark:text-gray-300">Trabajo remoto</label>
+            </div>
+            <div class="flex items-center">
+              <input
+                id="part-time"
+                type="checkbox"
+                class="h-4 w-4 text-blue-600 focus:ring-blue-500 rounded"
+              />
+              <label for="part-time" class="ml-2 text-sm text-gray-700 dark:text-gray-300">Medio tiempo</label>
+            </div>
+            <div class="flex items-center">
+              <input
+                id="freelance"
+                type="checkbox"
+                class="h-4 w-4 text-blue-600 focus:ring-blue-500 rounded"
+              />
+              <label for="freelance" class="ml-2 text-sm text-gray-700 dark:text-gray-300">Freelance</label>
+            </div>
+            <div class="flex items-center">
+              <input
+                id="urgent"
+                type="checkbox"
+                class="h-4 w-4 text-blue-600 focus:ring-blue-500 rounded"
+              />
+              <label for="urgent" class="ml-2 text-sm text-gray-700 dark:text-gray-300">Urgente</label>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>

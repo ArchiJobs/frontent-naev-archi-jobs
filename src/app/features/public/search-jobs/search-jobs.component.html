@@ -1,0 +1,17 @@
+<!-- Page Header -->
+<section class="bg-gradient-to-r from-blue-600 to-blue-700 dark:from-blue-700 dark:to-blue-800 text-white py-12">
+  <div class="container mx-auto px-4 md:px-8">
+    <h1 class="text-3xl md:text-4xl font-bold mb-4">Buscar Trabajos</h1>
+    <p class="text-xl text-blue-100">Encuentra tu próxima oportunidad profesional</p>
+  </div>
+</section>
+
+<!-- Search and Filters Section -->
+<div class="container mx-auto px-4 md:px-8 py-8">
+  <app-filter-jobs [categories]="categories" [locations]="locations"></app-filter-jobs>
+
+  <!-- Results Section -->
+  <div class="mt-8">
+    <app-result-jobs [jobs]="jobs"></app-result-jobs>
+  </div>
+</div>

@@ -1,0 +1,238 @@
+<div class="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100 dark:from-gray-900 dark:via-gray-800 dark:to-black grid grid-cols-1 md:grid-cols-2">
+  <div class="flex justify-center items-center p-8">
+    <div class="w-full max-w-md bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-2xl dark:shadow-black/30">
+      <div class="text-center mb-8">
+        <h1 class="text-4xl font-bold mb-2 text-gray-900 dark:text-white">
+          Únete a <span class="text-blue-600 dark:text-blue-400">Archi Jobs</span>
+        </h1>
+        <p class="text-gray-600 dark:text-gray-300">Crea tu cuenta y comienza tu carrera</p>
+      </div>
+
+      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="space-y-6">
+        <div>
+          <label for="userType" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+            ¿Eres?
+          </label>
+          <select
+            id="userType"
+            formControlName="userType"
+            class="w-full p-3 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white rounded-xl focus:ring-2 focus:ring-blue-500 focus:bg-white dark:focus:bg-gray-600 transition-all duration-200 appearance-none cursor-pointer"
+          >
+            <option value="PROFESIONAL">Profesional</option>
+            <option value="EMPRESA">Empresa</option>
+          </select>
+          <div
+            *ngIf="f['userType'].touched && f['userType'].invalid"
+            class="text-red-500 dark:text-red-400 text-sm mt-1"
+          >
+            El tipo de usuario es obligatorio.
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label for="firstName" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+              Nombre
+            </label>
+            <input
+              type="text"
+              id="firstName"
+              formControlName="firstName"
+              placeholder="Tu nombre"
+              class="w-full p-3 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white rounded-xl focus:ring-2 focus:ring-blue-500 focus:bg-white dark:focus:bg-gray-600 transition-all duration-200 placeholder-gray-400 dark:placeholder-gray-500"
+              [ngClass]="{
+                'ring-2 ring-red-500 bg-red-50 dark:bg-red-900/20': f['firstName'].touched && f['firstName'].invalid
+              }"
+            />
+            <div
+              *ngIf="f['firstName'].touched && f['firstName'].invalid"
+              class="text-red-500 dark:text-red-400 text-sm mt-1"
+            >
+              El nombre es obligatorio.
+            </div>
+          </div>
+
+          <div>
+            <label for="lastName" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+              Apellido
+            </label>
+            <input
+              type="text"
+              id="lastName"
+              formControlName="lastName"
+              placeholder="Tu apellido"
+              class="w-full p-3 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white rounded-xl focus:ring-2 focus:ring-blue-500 focus:bg-white dark:focus:bg-gray-600 transition-all duration-200 placeholder-gray-400 dark:placeholder-gray-500"
+              [ngClass]="{
+                'ring-2 ring-red-500 bg-red-50 dark:bg-red-900/20': f['lastName'].touched && f['lastName'].invalid
+              }"
+            />
+            <div
+              *ngIf="f['lastName'].touched && f['lastName'].invalid"
+              class="text-red-500 dark:text-red-400 text-sm mt-1"
+            >
+              El apellido es obligatorio.
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <label for="email" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+            Email
+          </label>
+          <input
+            type="email"
+            id="email"
+            formControlName="email"
+            placeholder="tu@email.com"
+            class="w-full p-3 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white rounded-xl focus:ring-2 focus:ring-blue-500 focus:bg-white dark:focus:bg-gray-600 transition-all duration-200 placeholder-gray-400 dark:placeholder-gray-500"
+            [ngClass]="{
+              'ring-2 ring-red-500 bg-red-50 dark:bg-red-900/20': f['email'].touched && f['email'].invalid
+            }"
+          />
+          <div
+            *ngIf="f['email'].touched && f['email'].invalid"
+            class="text-red-500 dark:text-red-400 text-sm mt-1"
+          >
+            <div *ngIf="f['email'].errors?.['required']">
+              El email es obligatorio.
+            </div>
+            <div *ngIf="f['email'].errors?.['email']">
+              El formato del email es incorrecto.
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <label for="password" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+            Contraseña
+          </label>
+          <div class="relative">
+            <input
+              type="{{ showPassword ? 'text' : 'password' }}"
+              id="password"
+              formControlName="password"
+              placeholder="••••••••"
+              class="w-full p-3 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white rounded-xl focus:ring-2 focus:ring-blue-500 focus:bg-white dark:focus:bg-gray-600 transition-all duration-200 placeholder-gray-400 dark:placeholder-gray-500 pr-12"
+            />
+            <button
+              type="button"
+              (click)="togglePassword()"
+              class="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300"
+            >
+              <svg *ngIf="!showPassword" class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+              </svg>
+              <svg *ngIf="showPassword" class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.878 9.878L3 3m6.878 6.878L21 21"></path>
+              </svg>
+            </button>
+          </div>
+          <div
+            *ngIf="f['password'].touched && f['password'].invalid"
+            class="text-red-500 dark:text-red-400 text-sm mt-1"
+          >
+            <div *ngIf="f['password'].errors?.['required']">
+              La contraseña es obligatoria.
+            </div>
+            <div *ngIf="f['password'].errors?.['minlength']">
+              La contraseña debe tener al menos 6 caracteres.
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <label for="confirmPassword" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+            Confirmar Contraseña
+          </label>
+          <input
+            type="password"
+            id="confirmPassword"
+            formControlName="confirmPassword"
+            placeholder="••••••••"
+            class="w-full p-3 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white rounded-xl focus:ring-2 focus:ring-blue-500 focus:bg-white dark:focus:bg-gray-600 transition-all duration-200 placeholder-gray-400 dark:placeholder-gray-500"
+          />
+          <div
+            *ngIf="f['confirmPassword'].touched && f['confirmPassword'].invalid"
+            class="text-red-500 dark:text-red-400 text-sm mt-1"
+          >
+            Las contraseñas no coinciden.
+          </div>
+        </div>
+
+        <div class="flex items-center">
+          <input
+            type="checkbox"
+            id="terms"
+            formControlName="terms"
+            class="h-4 w-4 text-blue-600 focus:ring-blue-500 rounded"
+          />
+          <label for="terms" class="ml-2 text-sm text-gray-700 dark:text-gray-300">
+            Acepto los <a href="#" class="text-blue-600 dark:text-blue-400 hover:underline">términos y condiciones</a>
+          </label>
+        </div>
+        <div
+          *ngIf="f['terms'].touched && f['terms'].invalid"
+          class="text-red-500 dark:text-red-400 text-sm"
+        >
+          Debes aceptar los términos y condiciones.
+        </div>
+
+        <!-- Mensaje de éxito -->
+        <div *ngIf="successMessage" class="bg-green-100 dark:bg-green-900/20 border border-green-400 dark:border-green-600 text-green-700 dark:text-green-400 px-4 py-3 rounded-lg">
+          {{ successMessage }}
+        </div>
+
+        <!-- Mensaje de error general -->
+        <div *ngIf="errorMessage" class="bg-red-100 dark:bg-red-900/20 border border-red-400 dark:border-red-600 text-red-700 dark:text-red-400 px-4 py-3 rounded-lg">
+          {{ errorMessage }}
+        </div>
+
+        <div>
+          <button
+            type="submit"
+            class="w-full p-3 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 dark:from-blue-500 dark:to-blue-600 dark:hover:from-blue-600 dark:hover:to-blue-700 text-white rounded-xl transition-all duration-200 font-semibold shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+            [disabled]="isLoading"
+          >
+            <span *ngIf="!isLoading">Crear Cuenta</span>
+            <span *ngIf="isLoading" class="flex items-center justify-center">
+              <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+              </svg>
+              Creando cuenta...
+            </span>
+          </button>
+        </div>
+
+        <div class="text-center space-y-2">
+          <p class="text-gray-600 dark:text-gray-400 text-sm">
+            ¿Ya tienes cuenta? 
+            <a routerLink="/auth/login" class="text-blue-600 dark:text-blue-400 hover:underline font-medium">Inicia sesión</a>
+          </p>
+          <a routerLink="/" class="text-gray-600 dark:text-gray-400 text-sm hover:text-blue-600 dark:hover:text-blue-400 transition-colors block">
+            Volver al inicio
+          </a>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="hidden md:flex justify-center items-center bg-gradient-to-br from-blue-600 to-blue-800 dark:from-blue-800 dark:to-gray-900 relative overflow-hidden">
+    <div class="text-center text-white p-8 z-10">
+      <h2 class="text-4xl font-bold mb-4">Comienza tu carrera hoy</h2>
+      <p class="text-xl opacity-90 mb-8">Miles de oportunidades te esperan en el sector de arquitectura y construcción</p>
+    </div>
+    <!-- Decorative background -->
+    <div class="absolute inset-0 opacity-10">
+      <svg class="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+        <defs>
+          <pattern id="grid-register" width="10" height="10" patternUnits="userSpaceOnUse">
+            <path d="M 10 0 L 0 0 0 10" fill="none" stroke="currentColor" stroke-width="0.5"/>
+          </pattern>
+        </defs>
+        <rect width="100" height="100" fill="url(#grid-register)" />
+      </svg>
+    </div>
+  </div>
+</div>

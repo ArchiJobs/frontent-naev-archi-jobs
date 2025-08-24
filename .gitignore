@@ -1,15 +1,20 @@
 # See https://docs.github.com/get-started/getting-started-with-git/ignoring-files for more about ignoring files.
 
 # Compiled output
-/dist
-/tmp
-/out-tsc
-/bazel-out
+dist/
+tmp/
+out-tsc/
+bazel-out/
+build/
 
 # Node
-/node_modules
-npm-debug.log
-yarn-error.log
+node_modules/
+npm-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
 
 # IDEs and editors
 .idea/
@@ -19,24 +24,58 @@ yarn-error.log
 *.launch
 .settings/
 *.sublime-workspace
-
-# Visual Studio Code
-.vscode/*
+.history/
+.vscode/
 !.vscode/settings.json
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
-.history/*
+
+# Angular
+.angular/
+.angular/cache/
+coverage/
+testem.log
+typings/
+
+# Sass
+.sass-cache/
 
 # Miscellaneous
-/.angular/cache
-.sass-cache/
-/connect.lock
-/coverage
-/libpeerconnection.log
-testem.log
-/typings
+connect.lock
+libpeerconnection.log
 
 # System files
 .DS_Store
 Thumbs.db
+ehthumbs.db
+Icon?
+Desktop.ini
+
+# OS generated
+*.swp
+*.swo
+*.tmp
+*.bak
+*.log
+
+# Env files
+.env
+.env.*
+
+# Github
+.github/
+
+# Others
+*.tgz
+*.tar.gz
+*.zip
+*.7z
+*.rar
+*.gz
+*.xz
+*.min.js
+*.map
+/vscode
+.vscode
+#Readme md
