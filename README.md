@@ -1,59 +1,127 @@
-# FrontendNaevJobSearch
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.3.
+# JobSearch Chile - Frontend
 
-## Development server
+Proyecto Angular 19 para la plataforma de búsqueda de empleos en arquitectura y construcción en Chile.
 
-To start a local development server, run:
+---
+
+## 🚀 Arquitectura y Estructura
+
+### Estructura de Features
+
+```
+src/app/features/
+├── public/        # Acceso público (home, búsqueda, detalles, about, pricing)
+├── auth/          # Autenticación (login, register)
+├── job-seeker/    # Trabajadores (dashboard, postulaciones, perfil, guardados)
+├── employer/      # Empresas (dashboard, publicar, gestionar)
+└── admin/         # Administración (futuro)
+```
+
+### Lazy Loading
+
+Rutas principales y privadas cargadas bajo demanda para optimizar performance y seguridad:
+
+- Rutas públicas: Home, búsqueda, detalles, about, pricing
+- Rutas de auth: login, register
+- Rutas privadas: job-seeker y employer (lazy loading)
+
+### Microservicios Backend
+
+- Spring Boot Gateway & Auth
+- NestJS para lógica de negocio (jobs, job-seeker, employer, notifications, payments)
+- PostgreSQL, Redis, RabbitMQ
+
+---
+
+## 🛣️ Rutas Principales
+
+| Ruta                | Componente                | Acceso      |
+|---------------------|--------------------------|-------------|
+| `/`                 | HomeComponent            | Público     |
+| `/search-jobs`      | SearchJobsComponent      | Público     |
+| `/job-details/:id`  | JobDetailsComponent      | Público     |
+| `/about`            | AboutComponent           | Público     |
+| `/pricing`          | PaymentsComponent        | Público     |
+| `/login`            | LoginComponent           | Público     |
+| `/register`         | RegisterComponent        | Público     |
+| `/job-seeker/*`     | job-seeker.routes.ts     | Privado     |
+| `/employer/*`       | employer.routes.ts       | Privado     |
+
+---
+
+## ⚡ Ventajas de la Arquitectura
+
+- Separación clara por dominio y tipo de usuario
+- Lazy loading y bundle splitting automático
+- Guards granulares por tipo de usuario y suscripción
+- SEO y mobile first
+- Escalabilidad y mantenibilidad
+
+---
+
+## 🧑‍💻 Desarrollo
+
+### Servidor de desarrollo
 
 ```bash
 ng serve
 ```
+Accede a `http://localhost:4200/`
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+### Generar componentes
 
 ```bash
-ng generate component component-name
+ng generate component features/job-seeker/dashboard
+ng generate component features/employer/post-job
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+### Build producción
 
 ```bash
-ng generate --help
+ng build --configuration production
 ```
 
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+### Ejecutar tests
 
 ```bash
 ng test
 ```
 
-## Running end-to-end tests
+---
 
-For end-to-end (e2e) testing, run:
+## 🛡️ Seguridad
 
-```bash
-ng e2e
-```
+- Guards de autenticación y suscripción
+- Interceptores para JWT y refresh token
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+---
 
-## Additional Resources
+## 📦 Microservicios
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+| Servicio                | Puerto | Stack      | Dominio         |
+|-------------------------|--------|------------|-----------------|
+| ms-archi-gateway        | 8080   | Spring     | Gateway         |
+| ms-archi-auth-profile   | 8081   | Spring     | Auth/Profile    |
+| ms-archi-jobs-public    | 3002   | NestJS     | Jobs Público    |
+| ms-archi-job-seeker     | 3003   | NestJS     | Trabajadores    |
+| ms-archi-employer       | 3004   | NestJS     | Empresas        |
+| ms-archi-notifications  | 3005   | NestJS     | Notificaciones  |
+| ms-archi-payments       | 3006   | NestJS     | Pagos           |
+
+---
+
+## 📚 Recursos
+
+- [Angular CLI Docs](https://angular.dev/tools/cli)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [NestJS](https://nestjs.com/)
+- [Spring Boot](https://spring.io/projects/spring-boot)
+
+---
+
+## 💡 Notas
+
+- Estructura modular y escalable
+- Listo para PWA y SEO
+- Responsive y mobile first
